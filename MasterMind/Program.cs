@@ -16,6 +16,8 @@ namespace MasterMind
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            const int maxLetters = 4;
+            const int maxTries = 11;
             char[] goal = new char[4];
             char[] guessArray = new char[4];
             char[] notOk = new char[4] {'_','_','_','_'};
@@ -28,8 +30,11 @@ namespace MasterMind
             string choice;
             int[] numberRandom = new int[4];
             string[] userInput = new string[10];
+            bool easyMode = false;
+            char [] easyDisplay = new char[4];
             do {
                 //message de bienvenue + choix du mode
+                easyMode = false;
                 Console.Clear();
                 Console.WriteLine("Bienvenue sur Mastermind!");
                 Console.WriteLine("Choisissez votre mode de jeu");
@@ -42,11 +47,12 @@ namespace MasterMind
                 {
                     case "1":
                         //si l'utilisateur choisi 1, le mode normal se lance
-                        NormalMode();
+                        Play();
                         break;
                     case "2":
-                        //si l'utilisateur choisi 2, le mode facile se lance
-                        EasyMode();
+                        //si l'utilisateur choisi 2, le mode facile se met en true et les options du mode facile seront activées pour la partie
+                        easyMode = true;
+                        Play();
                         break;
                     case "3":
                         //si l'utilisateur choisi 3, le jeu s'arrête
@@ -55,187 +61,157 @@ namespace MasterMind
                 }
                 Console.ReadLine();
             } while (quit == false);
-            //mode normal
-            void NormalMode()
+            //mode facile
+            void Play()
             {
-                Console.Clear();
-                Console.WriteLine("Couleurs possibles: GYWRBMC");
-                Console.WriteLine("Devine le code en 4 couleurs. \n");
-                //génère la suite à deviner aléatoirement
-                Random random = new Random();
-                for(int i = 0; i < 4; i++)
+                GenerateGoal();
+                for(tries = 1; tries < maxTries; ++tries)
                 {
-                    numberRandom[i] = random.Next(6);
-                }
-                //traduit le chiffre obtenu aléatoirement en lettre afin d'avoir la première, deuxième, troisième et quatrième position du code à deviner
-                for(int i = 0; i < 4; i++)
-                {
-                    SwitchGoalColors(numberRandom[i], i);
-                }
-                //le joueur rentre une suite et la console compare avec la suite à deviner et lui répond ensuite si c'est juste ou faux
-                for (tries = 1; tries < 11; ++tries)
-                {
-                    do
-                    {
-                        //vérifie que ce que l'utilisateur rentre fasse la bonne longueur. Si non, demande à l'utilisateur de re-rentrer un essai
-                        goodLenght = false;
-                        Console.Write("Essai " + tries + ": ");
-                        guess = Console.ReadLine();
-                        if (guess.Length == guessArray.Length)
-                            goodLenght = true;
-                        else
-                            Console.WriteLine("Votre essai doit faire 4 charactères");
+                    AskGuess();
+                    CompareGuessGoal();
 
-                    } while (goodLenght == false);
-                    guessArray = guess.ToCharArray();
-                    ok = 0;
-                    badPosition = 0;
-                    //Console.Write(goal);
-                    //Console.WriteLine(" (Seulement pour le test)");
-                    //La console compare l'essai de l'utilisateur et le code généré aléatoirement. Si une lettre est au bon emplacement, ajoute 1 a la variable ok.
-                    for (int i = 0; i < 4; i++)
-                    {
-                        notOk[i] = '_';
-                    }
-                    for (int i = 0; i < 4; i++)
-                    {
-                        if (guessArray[i] == goal[i])
-                        {
-                            ok++;
-                            notOk[i] = '_';
-                        }
-                        else
-                        {
-
-                            for (int j = 0; j < goal.Length; j++)
-                            {
-                                if (goal[j] == guessArray[i])
-                                {
-                                    if (goal[j] != guessArray[j])
-                                    {
-                                        notOk[i] = guessArray[i];
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-
-                    foreach (char j in notOk)
-                    {
-                        if (j != '_')
-                        {
-                            badPosition++;
-                        }
-
-                    }
-                    //si les 4 lettres sont bonnes, le programme félicite le joueur
-                    if (ok == 4)
+                    //si les 4 lettres sont bonnes, le programme félicite le joueur et le rammène au menu
+                    if (ok == maxLetters)
                     {
                         Console.WriteLine("Bravo !");
+                        Console.WriteLine("Vous allez être rammené(e) sur le menu");
                         break;
                     }
-                    Console.WriteLine("=>Ok: " + ok);
-                    Console.WriteLine("=>Mauvaise position: " + badPosition + "\n");
-                }
-                //si tous les essais sont épuisée, la console révèle le code caché
-                if (tries == 11)
-                {
-                    Console.Write("Vous avez perdu, le code était ");
-                    foreach (char item in goal)
+                    //si tous les essais sont épuisée, la console révèle le code caché
+                    else if (tries == maxTries)
                     {
-                        Console.Write(item.ToString());
+                        Console.Write("Vous avez perdu, le code était ");
+                        foreach (char item in goal)
+                        {
+                            Console.Write(item.ToString());
+                            Console.WriteLine();
+
+                            //La console informe le joeuur qu'il sera rammené au menu
+                            Console.WriteLine("Vous allez être rammené(e) sur le menu");
+                            Console.ReadLine();
+                        }
                     }
                 }
-                Console.WriteLine();
-                //La console informe le joeuur qu'il sera rammené au menu
-                Console.WriteLine("Vous allez être rammené(e) sur le menu");
-                Console.ReadLine();
             }
-            //mode facile
-            void EasyMode()
+
+            //Génère le code à trouver
+            void GenerateGoal()
             {
                 Console.Clear();
                 Console.WriteLine("Couleurs possibles: GYWRBMC");
                 Console.WriteLine("Devine le code en 4 couleurs. \n");
+
                 //génère la suite à deviner aléatoirement
                 Random random = new Random();
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < maxLetters; i++)
                 {
                     numberRandom[i] = random.Next(6);
                 }
+
                 //traduit le chiffre obtenu aléatoirement en lettre afin d'avoir la première, deuxième, troisième et quatrième position du code à deviner
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < maxLetters; i++)
                 {
                     SwitchGoalColors(numberRandom[i], i);
                 }
-                //le joueur rentre une suite et la console compare avec la suite à deviner et lui répond ensuite si c'est juste ou faux
-                for (tries = 1; tries < 11; ++tries)
+
+            }
+
+            //Demander l'essai au joueur
+            void AskGuess()
+            {
+                //réinitialise les essais que le joueur a rentré aux parties précédentes
+                for (int i = 0; i < maxTries - 1; i++)
                 {
-                    char[] easyDisplay = { '_', '_', '_', '_' };
+                    userInput[i] = " ";
+                }
+
+                //si le mode facile est activé, met à zero l'affichage d'aide
+                if (easyMode == true)
+                {
+                    for (int i = 0; i < maxLetters; ++i)
+                        easyDisplay[i] = '_';
+                }
+                do
+                {
+
+                    //vérifie que ce que l'utilisateur rentre fasse la bonne longueur. Si non, demande à l'utilisateur de re-rentrer un essai
+                    goodLenght = false;
+
+                    //empêche le joueur de rentrer deux fois le même essai si le mode facile est activé. Sinon, enregistre simplement ce que le joueur a rentré.
                     do
                     {
-                        //vérifie que ce que l'utilisateur rentre fasse la bonne longueur. Si non, demande à l'utilisateur de re-rentrer un essai
-                        goodLenght = false;
-                        //empêche le joueur de rentrer deux fois le même essai
-                        do
+                        Console.Write("Essai " + tries + ": ");
+                        guess = Console.ReadLine();
+
+                        if (easyMode == true)
                         {
-                            Console.Write("Essai " + tries + ": ");
-                            guess = Console.ReadLine();
                             if (userInput.Contains(guess))
                             {
                                 Console.WriteLine("Vous déja essayé cette combinaison. Rentrez-en une autre.");
                             }
-                        } while (userInput.Contains(guess));
-
-                        userInput[tries - 1] = guess;
-
-                        if (guess.Length == guessArray.Length)
-                            goodLenght = true;
-                        else
-                        {
-                            Console.WriteLine("Votre essai doit faire 4 charactères");
                         }
+                    } while (userInput.Contains(guess));
 
-                    } while (goodLenght == false);
-                    guessArray = guess.ToCharArray();
-                    ok = 0;
-                    badPosition = 0;
-                    //Console.Write(goal);
-                    //Console.WriteLine(" (Seulement pour le test)");
-                    //La console compare l'essai de l'utilisateur et le code généré aléatoirement. Si une lettre est au bon emplacement, il la rajoute dans l'affichage.
-                    for (int i = 0; i < 4; i++)
+                    if (easyMode == true)
                     {
-                        notOk[i] = '_';
+                        userInput[tries - 1] = guess;
                     }
-                    for (int i = 0; i < 4; i++)
+
+                    if (guess.Length == guessArray.Length)
+                        goodLenght = true;
+                    else
                     {
-                        if (guessArray[i] == goal[i])
+                        Console.WriteLine("Votre essai doit faire 4 charactères");
+                    }
+
+                } while (goodLenght == false);
+
+                guessArray = guess.ToCharArray();
+                ok = 0;
+                badPosition = 0;
+            }
+
+            //Comparer l'essai au code à trouver et afficher le résultat
+            void CompareGuessGoal()
+            {
+                //La console compare l'essai de l'utilisateur et le code généré aléatoirement. Si une lettre est au bon emplacement, il la rajoute dans l'affichage si le mode facile est activé.
+                for (int i = 0; i < maxLetters; i++)
+                {
+                    notOk[i] = '_';
+                }
+                for (int i = 0; i < maxLetters; i++)
+                {
+                    if (guessArray[i] == goal[i])
+                    {
+                        ok++;
+                        if (easyMode == true)
                         {
-                            ok++;
                             easyDisplay[i] = goal[i];
                         }
-                        else
+                    }
+                    else
+                    {
+                        for (int j = 0; j < goal.Length; j++)
                         {
-                            for (int j = 0; j < goal.Length; j++)
+                            if (goal[j] == guessArray[i])
                             {
-                                if (goal[j] == guessArray[i])
+                                if (goal[j] != guessArray[j])
                                 {
-                                    if (goal[j] != guessArray[j])
-                                    {
-                                        notOk[i] = guessArray[i];
-                                    }
-                                    else
-                                    {
-                                        notOk[i] = '_';
-                                    }
+                                    notOk[i] = guessArray[i];
+                                }
+                                else
+                                {
+                                    notOk[i] = '_';
                                 }
                             }
-
                         }
                     }
-                    //place un $ si la couleur est mal placée
-                    for (int i = 0; i < 4; i++)
+                }
+
+                //place un $ si la couleur est mal placée si le mode facile est activé
+                if (easyMode == true)
+                {
+                    for (int i = 0; i < maxLetters; i++)
                     {
                         if (notOk[i] != '_' && goal[i] != '_')
                         {
@@ -243,12 +219,25 @@ namespace MasterMind
                             easyDisplay[i] = '$';
                         }
                     }
-                    //si les 4 lettres sont bonnes, le programme félicite le joueur
-                    if (ok == 4)
+                }
+                else if (easyMode == false)
+                {
+                    for (int i = 0; i < maxLetters; i++)
                     {
-                        Console.WriteLine("Bravo !");
-                        break;
+                        if (i != '_')
+                        {
+                            if (notOk[i] != '_')
+                            {
+                                badPosition++;
+                            }
+                        }
+
                     }
+                }
+
+                //si le mode facile est activé, affiche l'aide 
+                if (easyMode == true)
+                {
                     Console.Write("Réponse [$=bonne couleur]: ");
                     for (int i = 0; i < 4; i++)
                     {
@@ -336,25 +325,20 @@ namespace MasterMind
                     }
                     Console.WriteLine("\n");
                 }
-                //si tous les essais sont épuisée, la console révèle le code caché
-                if (tries == 11)
+
+                else if (easyMode == false)
                 {
-                    Console.Write("Vous avez perdu, le code était ");
-                    foreach (char item in goal)
-                    {
-                        Console.Write(item.ToString());
-                    }
+                    Console.WriteLine("=>Ok: " + ok);
+                    Console.WriteLine("=>Mauvaise position: " + badPosition + "\n");
                 }
-                Console.WriteLine();
-                //La console informe le joeuur qu'il sera rammené au menu
-                Console.WriteLine("Vous allez être rammené(e) sur le menu");
-                Console.ReadLine();
             }
+
             //arrêter le jeu
             bool StopGame()
             {
                 return true;
             }
+
             //attribuer les lettres pour le code secret
             void SwitchGoalColors(int number, int numberPlace)
             {
