@@ -20,14 +20,14 @@ namespace MasterMind
             char[] guessArray = new char[4];
             char[] notOk = new char[4] {'_','_','_','_'};
             int tries;
-            string guess;
+            string guess = "";
             int ok = 0;
             int badPosition = 0;
             bool quit = false;
             bool goodLenght = false;
             string choice;
             int[] numberRandom = new int[4];
-            string[] userInput
+            string[] userInput = new string[10];
             do {
                 //message de bienvenue + choix du mode
                 Console.Clear();
@@ -177,12 +177,25 @@ namespace MasterMind
                     {
                         //vérifie que ce que l'utilisateur rentre fasse la bonne longueur. Si non, demande à l'utilisateur de re-rentrer un essai
                         goodLenght = false;
-                        Console.Write("Essai " + tries + ": ");
-                        guess = Console.ReadLine();
+                        //empêche le joueur de rentrer deux fois le même essai
+                        do
+                        {
+                            Console.Write("Essai " + tries + ": ");
+                            guess = Console.ReadLine();
+                            if (userInput.Contains(guess))
+                            {
+                                Console.WriteLine("Vous déja essayé cette combinaison. Rentrez-en une autre.");
+                            }
+                        } while (userInput.Contains(guess));
+
+                        userInput[tries - 1] = guess;
+
                         if (guess.Length == guessArray.Length)
                             goodLenght = true;
                         else
+                        {
                             Console.WriteLine("Votre essai doit faire 4 charactères");
+                        }
 
                     } while (goodLenght == false);
                     guessArray = guess.ToCharArray();
