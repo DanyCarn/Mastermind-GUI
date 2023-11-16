@@ -16,7 +16,7 @@ namespace Mastermind_GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Mastermind());
+            Application.Run(new MastermindMenu());
         }
     }
 }

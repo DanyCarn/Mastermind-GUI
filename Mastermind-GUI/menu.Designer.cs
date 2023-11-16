@@ -32,14 +32,17 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnEasy = new System.Windows.Forms.Button();
             this.btnNormal = new System.Windows.Forms.Button();
+            this.QuitGamebtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblWelcome
             // 
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.Location = new System.Drawing.Point(259, 139);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(323, 88);
+            this.lblWelcome.Size = new System.Drawing.Size(323, 199);
             this.lblWelcome.TabIndex = 1;
+            this.lblWelcome.Text = "Text";
             this.lblWelcome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTitle
@@ -71,11 +74,22 @@
             this.btnNormal.UseVisualStyleBackColor = true;
             this.btnNormal.Click += new System.EventHandler(this.btnNormal_Click);
             // 
+            // QuitGamebtn
+            // 
+            this.QuitGamebtn.Location = new System.Drawing.Point(723, 452);
+            this.QuitGamebtn.Name = "QuitGamebtn";
+            this.QuitGamebtn.Size = new System.Drawing.Size(123, 48);
+            this.QuitGamebtn.TabIndex = 4;
+            this.QuitGamebtn.Text = "Quitter";
+            this.QuitGamebtn.UseVisualStyleBackColor = true;
+            this.QuitGamebtn.Click += new System.EventHandler(this.QuitGamebtn_Click);
+            // 
             // MastermindMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 512);
+            this.Controls.Add(this.QuitGamebtn);
             this.Controls.Add(this.btnNormal);
             this.Controls.Add(this.btnEasy);
             this.Controls.Add(this.lblWelcome);
@@ -92,5 +106,6 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button btnEasy;
         private System.Windows.Forms.Button btnNormal;
+        private System.Windows.Forms.Button QuitGamebtn;
     }
 }

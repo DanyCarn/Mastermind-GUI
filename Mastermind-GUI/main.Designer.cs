@@ -579,9 +579,9 @@
             // 
             this.btnQuit.Location = new System.Drawing.Point(17, 625);
             this.btnQuit.Name = "btnQuit";
-            this.btnQuit.Size = new System.Drawing.Size(91, 27);
+            this.btnQuit.Size = new System.Drawing.Size(113, 27);
             this.btnQuit.TabIndex = 21;
-            this.btnQuit.Text = "Quitter";
+            this.btnQuit.Text = "Retour au Menu";
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
