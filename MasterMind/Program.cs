@@ -8,12 +8,10 @@ namespace MasterMind
 {
     internal class Program
     {
-        /// <summary>
+        /// ETML
         /// Description : Jeu mastermind où la console génère un code aléatoire que l'utilisateur doit deviner grâce aux indices de la console, couleur bien placée ou pas au bon emplacement
         /// Auteur      : Dany Carneiro
         /// Date        : 01.09.2023
-        /// </summary>
-        /// <param name="args"></param>
         static void Main(string[] args)
         {
             const int maxLetters = 4;

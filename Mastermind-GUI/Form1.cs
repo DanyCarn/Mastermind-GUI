@@ -32,5 +32,6 @@ namespace Mastermind_GUI
         {
             Application.Exit();
         }
+
     }
 }

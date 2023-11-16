@@ -20,3 +20,4 @@ D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.csproj.GenerateResou
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.csproj.CoreCompileInputs.cache
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.exe
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.pdb
+D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind_GUI.MastermindMenu.resources
