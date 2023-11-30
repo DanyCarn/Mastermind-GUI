@@ -222,7 +222,7 @@ namespace MasterMind
                 {
                     for (int i = 0; i < maxLetters; i++)
                     {
-                        if (i != '_')
+                        if (i != '_') 
                         {
                             if (notOk[i] != '_')
                             {

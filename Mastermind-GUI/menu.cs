@@ -29,16 +29,14 @@ namespace Mastermind_GUI
         {
             //Message de bienvenue au jeu
             lblWelcome.Text = "Bienvenue au Mastermind \n" +
-                "Dans ce jeu, vous devez trouver le code caché de quatre couleurs.\n \n" +
-                "Choisissez le mode de jeu : ";
+                "Dans ce jeu, vous devez trouver le code caché de quatre couleurs.\n \n";
         }
-
         private void btnNormal_Click(object sender, EventArgs e)
         {
             //crée une instance pour appeller le mode normal du jeu
             Form Mastermind = new Mastermind();
 
-            //affiche l'autre page pour jouer et cache la page de menu
+            //affiche l'autre page
             Mastermind.Show();
 
             //Cache le menu
