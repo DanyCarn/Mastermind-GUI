@@ -37,16 +37,16 @@
             this.btnWhite = new System.Windows.Forms.Button();
             this.btnGreen = new System.Windows.Forms.Button();
             this.btnRed = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.recommencerPartieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQuit = new System.Windows.Forms.Button();
             this.guessLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanelAnswer = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelHints = new System.Windows.Forms.TableLayoutPanel();
             this.checkBoxDebug = new System.Windows.Forms.CheckBox();
-            this.menuStrip1.SuspendLayout();
+            this.menuStripGame = new System.Windows.Forms.MenuStrip();
+            this.langueToolStripMenuItemLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStripGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEnterTry
@@ -139,38 +139,6 @@
             this.btnRed.UseVisualStyleBackColor = false;
             this.btnRed.Click += new System.EventHandler(this.btn_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.recommencerPartieToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(467, 24);
-            this.menuStrip1.TabIndex = 20;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // recommencerPartieToolStripMenuItem
-            // 
-            this.recommencerPartieToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.françaisToolStripMenuItem,
-            this.englishToolStripMenuItem});
-            this.recommencerPartieToolStripMenuItem.Name = "recommencerPartieToolStripMenuItem";
-            this.recommencerPartieToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.recommencerPartieToolStripMenuItem.Text = "Langue";
-            // 
-            // françaisToolStripMenuItem
-            // 
-            this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
-            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.françaisToolStripMenuItem.Text = "Français";
-            // 
-            // englishToolStripMenuItem
-            // 
-            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.englishToolStripMenuItem.Text = "English";
-            // 
             // btnQuit
             // 
             this.btnQuit.Location = new System.Drawing.Point(16, 564);
@@ -225,6 +193,39 @@
             this.checkBoxDebug.UseVisualStyleBackColor = true;
             this.checkBoxDebug.CheckedChanged += new System.EventHandler(this.checkBoxDebug_CheckedChanged);
             // 
+            // menuStripGame
+            // 
+            this.menuStripGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.langueToolStripMenuItemLanguage});
+            this.menuStripGame.Location = new System.Drawing.Point(0, 0);
+            this.menuStripGame.Name = "menuStripGame";
+            this.menuStripGame.Size = new System.Drawing.Size(467, 24);
+            this.menuStripGame.TabIndex = 30;
+            this.menuStripGame.Text = "menuStrip1";
+            // 
+            // langueToolStripMenuItemLanguage
+            // 
+            this.langueToolStripMenuItemLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.françaisToolStripMenuItem,
+            this.englishToolStripMenuItem});
+            this.langueToolStripMenuItemLanguage.Name = "langueToolStripMenuItemLanguage";
+            this.langueToolStripMenuItemLanguage.Size = new System.Drawing.Size(58, 20);
+            this.langueToolStripMenuItemLanguage.Text = "Langue";
+            // 
+            // françaisToolStripMenuItem
+            // 
+            this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
+            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.françaisToolStripMenuItem.Text = "Français";
+            this.françaisToolStripMenuItem.Click += new System.EventHandler(this.françaisToolStripMenuItem_Click);
+            // 
+            // englishToolStripMenuItem
+            // 
+            this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.englishToolStripMenuItem.Text = "English";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
             // Mastermind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,13 +246,12 @@
             this.Controls.Add(this.btnWhite);
             this.Controls.Add(this.btnGreen);
             this.Controls.Add(this.btnRed);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStripGame);
             this.Name = "Mastermind";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mastermind";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStripGame.ResumeLayout(false);
+            this.menuStripGame.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -267,15 +267,15 @@
         private System.Windows.Forms.Button btnWhite;
         private System.Windows.Forms.Button btnGreen;
         private System.Windows.Forms.Button btnRed;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem recommencerPartieToolStripMenuItem;
         private System.Windows.Forms.Button btnQuit;
         private System.Windows.Forms.TableLayoutPanel guessLayoutPanel;
-        private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel layoutPanelAnswer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHints;
         private System.Windows.Forms.CheckBox checkBoxDebug;
+        private System.Windows.Forms.MenuStrip menuStripGame;
+        private System.Windows.Forms.ToolStripMenuItem langueToolStripMenuItemLanguage;
+        private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
     }
 }
 

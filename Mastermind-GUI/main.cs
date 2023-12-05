@@ -25,13 +25,21 @@ namespace Mastermind_GUI
         private const int HINT_SIZE_X = 10;
         private const int HINT_SIZE_Y = 10;
 
+        public bool english = false;
+
         private int guessRow = 0;
         private int guessCol = 0;
         private int currentColumn = 0;
         private int currentRow = 0;
-        private int guessOk = 0;
+        private int hintOk = 0;
         private int badPosition = 0;
         private int finalVerificationOk = 0;
+        //message de réussite
+        private string victoryMessage = "Bravo vous avez trouvé !";
+        //message d'échec
+        private string loseMessage = "Vous avez perdu ! Dommage...";
+        //message qui indique que le nombre max de couleurs a été rentré
+        private string maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
 
         private int[] numberRandom = new int[COLUMNS];
         private Label[,] labelArray = new Label[ROWS, COLUMNS];
@@ -44,7 +52,6 @@ namespace Mastermind_GUI
         public Mastermind()
         {
             InitializeComponent();
-            CreateLabelTable(guessLayoutPanel, COLUMNS, ROWS, labelArray);
             DisplayGuessTable(guessLayoutPanel, COLUMNS, ROWS);
             GenerateColor();
             DisplayAnswerTable(layoutPanelAnswer, COLUMNS, ROWS);
@@ -62,7 +69,7 @@ namespace Mastermind_GUI
             if(currentColumn == COLUMNS)
             {
                 //Si 4 couleurs ont déja été rentrées, en informe le joueur et lui indique les différentes options à sa disposition 
-                MessageBox.Show("Le nombre de couleurs maximum par essai a été atteint.");
+                MessageBox.Show(maxColorsMessage);
             }
             else
             {
@@ -76,6 +83,7 @@ namespace Mastermind_GUI
             //Si le code contient 4 couleurs, active le bouton valider
             ActivateValidateBtn();
         } 
+
 
         /// <summary>
         /// Nettoie l'essai de toutes les couleurs
@@ -91,6 +99,7 @@ namespace Mastermind_GUI
             }
             currentColumn = 0;
         }
+
         /// <summary>
         /// Quitte le jeu et revient au menu
         /// </summary>
@@ -107,6 +116,7 @@ namespace Mastermind_GUI
             //cache cette page
             this.Close();
         }
+
 
         /// <summary>
         /// Génère la tableau qui affiche les essais
@@ -150,6 +160,7 @@ namespace Mastermind_GUI
             }
         }
 
+
         /// <summary>
         /// Initialise le tableau qui montrera la réponse à la fin de la partie
         /// </summary>
@@ -191,6 +202,7 @@ namespace Mastermind_GUI
             }
         }
 
+
         /// <summary>
         /// Génère le code de couleur aléatoire à trouver
         /// </summary>
@@ -204,6 +216,7 @@ namespace Mastermind_GUI
                 SwitchGoalColors(numberRandom[i], i);
             }
         }
+
 
         /// <summary>
         /// Switch permettant de traduire les chiffres générés en couleurs pour le code à trouver
@@ -240,6 +253,7 @@ namespace Mastermind_GUI
 
         }
 
+
         /// <summary>
         /// Permet de valider l'essai actuel et de passer au prochain
         /// </summary>
@@ -254,8 +268,9 @@ namespace Mastermind_GUI
             ActivateValidateBtn();
 
             //Réinitialise le nombre de couleurs trouvées pour le prochain essai
-            guessOk = 0;
+            hintOk = 0;
         }
+
 
         /// <summary>
         /// Désactive le bouton Valider tant que le code ne contient pas 4 couleurs
@@ -272,13 +287,14 @@ namespace Mastermind_GUI
             }
         }
 
+
         /// <summary>
         /// Compare l'essai du joueur au code à trouver
         /// </summary>
         private void CompareGoalGuess()
         {
             //réinitialise les variables qui permettent la vérification
-            guessOk = 0;
+            hintOk = 0;
             badPosition = 0;
             finalVerificationOk = 0;
 
@@ -290,35 +306,35 @@ namespace Mastermind_GUI
 
             for (int i = 0; i < COLUMNS; i++)
             {
+                //si la couleur est juste, augmente le nombre des indices à mettre et le compteur de couleurs trouvées
                 if (guessColors[i] == goalColors[i])
                 {
-                    guessOk++;
+                    hintOk++;
                     finalVerificationOk++;
                 }
 
                 else
                 {
+
+                    //parcours le goal et le compare au guess afin de trouver des couleurs mal placées
                     for (int j = 0; j < COLUMNS; j++)
                     {
                         if (goalColors[j] == guessColors[i])
                         {
+                            //si un couleur est mal placée et qu'elle n'est pas également placée au bon endroit plus loin dans le guess, change la couleur du notOk pour pouvoir avoir le compte des mal placés
                             if (goalColors[j] != guessColors[j])
                             {
-                                notOk[i] = guessColors[i];
-                            }
-                            else
-                            {
-                                notOk[i] = Color.Black;
-                                break;
+                                notOk[i] = Color.Red;
                             }
                         }
                     }
                 }
             }
 
+            //pour chaque couleur rouge dans le tableau notOk,augmente le compteur bad position pour mettre les indices de mal placé
             for (int i = 0; i < COLUMNS; i++)
             {
-                if (notOk[i] != Color.Black)
+                if (notOk[i] == Color.Red)
                 {
                     badPosition++;
                 }
@@ -328,24 +344,27 @@ namespace Mastermind_GUI
             //affiche les indices
             for(int i = 0; i < COLUMNS; i++)
             {
-                if(badPosition != 0)
+                if(badPosition > 0)
                 {
                     hints[currentRow, i].BackColor = Color.Black;
                     badPosition--;
                 }
 
-                else if(guessOk != 0)
+                else if(hintOk != 0)
                 {
                     hints[currentRow, i].BackColor = Color.White;
-                    guessOk--;
+                    hintOk--;
                 }
             }
 
             //Si 4 couleurs justes ont été trouvées, fini le jeu
             if (finalVerificationOk == 4)
             {
+                //instancie le menu 
                 Form MastermindMenu = new MastermindMenu();
-                MessageBox.Show("Bravo vous avez trouvé !");
+
+                //affiche le message de réussite
+                MessageBox.Show(victoryMessage);
 
                 //Affiche le menu du jeu 
                 MastermindMenu.Show();
@@ -363,8 +382,9 @@ namespace Mastermind_GUI
                     labelAnswerArray[i].BackColor = goalColors[i];
                 }
                 //Affiche le message si le joueur a perdu et le renvoie sur la page d'accueil
-                MessageBox.Show("Vous avez perdu ! Dommage.");
+                MessageBox.Show(loseMessage);
 
+                //instancie le menu
                 Form MastermindMenu = new MastermindMenu();
 
                 //Affiche le menu du jeu 
@@ -382,6 +402,7 @@ namespace Mastermind_GUI
                 currentColumn = 0;
             }           
         }
+
 
         /// <summary>
         /// Affiche le tableau qui indiquera les indices 
@@ -440,40 +461,64 @@ namespace Mastermind_GUI
                     labelAnswerArray[i].BackColor = goalColors[i];
                 }
             }
+            else
+            {
+                for(int i = 0; i < COLUMNS; i++)
+                {
+                    labelAnswerArray[i].BackColor = SystemColors.AppWorkspace;
+                }
+            }
         }
 
-        private void CreateLabelTable(TableLayoutPanel panel, int columns, int rows, Label[,] array)
+
+        /// <summary>
+        /// Change le booléen de l'anglais lorsque le joueur appuie sur "English"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //crée le tableau affiché qui montrera la réponse
-            panel.ColumnCount = columns;
-            panel.RowCount = rows;
-            panel.AutoSize = true;
-            panel.RowStyles.Clear();
-            panel.ColumnStyles.Clear();
+            english = true;
+            ChangeLanguage();
+        }
 
-            for (int i = 0; i < columns; i++)
+
+        /// <summary>
+        /// Change le booléen de l'anglais lorsque le joueur appuie sur "English"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void françaisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            english = false;
+            ChangeLanguage();
+        }
+
+
+        /// <summary>
+        /// Change la langue du jeu
+        /// </summary>
+        private void ChangeLanguage()
+        {
+            if(english == true)
             {
-                //crée chaque label
-                Label label = new Label();
-                label.AutoSize = false;
-                label.Size = new Size(GUESS_SIZE_X, GUESS_SIZE_Y);
-                label.BorderStyle = BorderStyle.FixedSingle;
-                label.Name = "goal" + Convert.ToString(guessRow) + Convert.ToString(guessCol);
-                label.Controls.Add(label);
-
-                //Place le label dans le tableau
-                array[i] = label;
+                langueToolStripMenuItemLanguage.Text = "Language";
+                btnEnterTry.Text = "Validate";
+                btnClear.Text = "Clear";
+                btnQuit.Text = "Return to menu";
+                loseMessage = "You lost ! Take the L.";
+                victoryMessage = "Well done, you won !";
+                maxColorsMessage = "Maximum of colors reached.";
             }
-
-            //ajoute les styles pour que le tableau soit bien mis en place
-            for (int i = 0; i < rows; i++)
+            else
             {
-                panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / ROWS));
-            }
-
-            for (int i = 0; i < columns; i++)
-            {
-                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / COLUMNS));
+                langueToolStripMenuItemLanguage.Text = "Langue";
+                btnEnterTry.Text = "Valider";
+                btnClear.Text = "Effacer";
+                btnQuit.Text = "Retour au Menu";
+                loseMessage = "Vous avez perdu ! Pfff la loose !";
+                victoryMessage = "Bravo vous avez trouvé !";
+                maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
             }
         }
     }

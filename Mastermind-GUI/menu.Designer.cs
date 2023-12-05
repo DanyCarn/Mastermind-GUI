@@ -30,7 +30,7 @@
         {
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.btnNormal = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.QuitGamebtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -49,22 +49,22 @@
             // 
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Showcard Gothic", 50F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(185, 9);
+            this.lblTitle.Location = new System.Drawing.Point(186, 24);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(494, 130);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Mastermind";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnNormal
+            // btnPlay
             // 
-            this.btnNormal.Location = new System.Drawing.Point(329, 341);
-            this.btnNormal.Name = "btnNormal";
-            this.btnNormal.Size = new System.Drawing.Size(195, 90);
-            this.btnNormal.TabIndex = 3;
-            this.btnNormal.Text = "Jouer";
-            this.btnNormal.UseVisualStyleBackColor = true;
-            this.btnNormal.Click += new System.EventHandler(this.btnNormal_Click);
+            this.btnPlay.Location = new System.Drawing.Point(329, 341);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(195, 90);
+            this.btnPlay.TabIndex = 3;
+            this.btnPlay.Text = "Jouer";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // QuitGamebtn
             // 
@@ -83,7 +83,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(858, 512);
             this.Controls.Add(this.QuitGamebtn);
-            this.Controls.Add(this.btnNormal);
+            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblWelcome);
             this.Controls.Add(this.lblTitle);
             this.Name = "MastermindMenu";
@@ -97,7 +97,7 @@
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblWelcome;
-        private System.Windows.Forms.Button btnNormal;
+        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button QuitGamebtn;
     }
 }

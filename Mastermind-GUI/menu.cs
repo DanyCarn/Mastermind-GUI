@@ -17,11 +17,14 @@ namespace Mastermind_GUI
 {
     public partial class MastermindMenu : Form
     {
+        //instancie le form du jeu
+        private Form Mastermind = new Mastermind();
         public MastermindMenu()
         {
             InitializeComponent();
             DisplayWelcome();
         }
+
         /// <summary>
         /// Affiche le message de bienvenue dans le menu du mastermind
         /// </summary>
@@ -29,24 +32,36 @@ namespace Mastermind_GUI
         {
             //Message de bienvenue au jeu
             lblWelcome.Text = "Bienvenue au Mastermind \n" +
-                "Dans ce jeu, vous devez trouver le code caché de quatre couleurs.\n \n";
+                "Dans ce jeu, vous devez trouver le code caché de quatre couleurs en moins de 10 essais.\n" +
+                "Bonne Chance ! \n";
         }
-        private void btnNormal_Click(object sender, EventArgs e)
+
+
+        /// <summary>
+        /// quitte le jeu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QuitGamebtn_Click(object sender, EventArgs e)
         {
-            //crée une instance pour appeller le mode normal du jeu
-            Form Mastermind = new Mastermind();
+            Application.Exit();
+        }
+
+
+        /// <summary>
+        /// Affiche la fenêtre de jeu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
 
             //affiche l'autre page
             Mastermind.Show();
 
             //Cache le menu
             this.Hide();
-            
-        }
 
-        private void QuitGamebtn_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }
