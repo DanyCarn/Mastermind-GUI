@@ -46,6 +46,8 @@
             this.langueToolStripMenuItemLanguage = new System.Windows.Forms.ToolStripMenuItem();
             this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.difficultéToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ColorRepetitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripGame.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,7 +198,8 @@
             // menuStripGame
             // 
             this.menuStripGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.langueToolStripMenuItemLanguage});
+            this.langueToolStripMenuItemLanguage,
+            this.difficultéToolStripMenuItem});
             this.menuStripGame.Location = new System.Drawing.Point(0, 0);
             this.menuStripGame.Name = "menuStripGame";
             this.menuStripGame.Size = new System.Drawing.Size(467, 24);
@@ -215,16 +218,34 @@
             // françaisToolStripMenuItem
             // 
             this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
-            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.françaisToolStripMenuItem.Text = "Français";
             this.françaisToolStripMenuItem.Click += new System.EventHandler(this.françaisToolStripMenuItem_Click);
             // 
             // englishToolStripMenuItem
             // 
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
-            this.englishToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.englishToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
+            // 
+            // difficultéToolStripMenuItem
+            // 
+            this.difficultéToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ColorRepetitionToolStripMenuItem});
+            this.difficultéToolStripMenuItem.Name = "difficultéToolStripMenuItem";
+            this.difficultéToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.difficultéToolStripMenuItem.Text = "Difficulté";
+            // 
+            // ColorRepetitionToolStripMenuItem
+            // 
+            this.ColorRepetitionToolStripMenuItem.Checked = true;
+            this.ColorRepetitionToolStripMenuItem.CheckOnClick = true;
+            this.ColorRepetitionToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ColorRepetitionToolStripMenuItem.Name = "ColorRepetitionToolStripMenuItem";
+            this.ColorRepetitionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.ColorRepetitionToolStripMenuItem.Text = "Répétition de couleurs";
+            this.ColorRepetitionToolStripMenuItem.Click += new System.EventHandler(this.ColorRepetitionToolStripMenuItem_Click);
             // 
             // Mastermind
             // 
@@ -276,6 +297,8 @@
         private System.Windows.Forms.ToolStripMenuItem langueToolStripMenuItemLanguage;
         private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem difficultéToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ColorRepetitionToolStripMenuItem;
     }
 }
 

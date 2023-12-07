@@ -25,7 +25,12 @@ namespace Mastermind_GUI
         private const int HINT_SIZE_X = 10;
         private const int HINT_SIZE_Y = 10;
 
-        public bool english = false;
+        private bool english = false;
+        //permet de savoir si le joueur veut les répétitions de couleurs ou pas
+        private bool repetitionColors = true;
+        //permet de savoir si un chiffre du code a déja été généré
+        private bool alreadyChecked = false;
+
 
         private int guessRow = 0;
         private int guessCol = 0;
@@ -48,6 +53,7 @@ namespace Mastermind_GUI
         private Color[] guessColors = new Color[COLUMNS];
         private Color[] notOk = new Color[COLUMNS];
         private Label[,] hints = new Label[ROWS, COLUMNS];
+        private int[] alreadyCheckedColors = new int[COLUMNS];
 
         public Mastermind()
         {
@@ -213,6 +219,11 @@ namespace Mastermind_GUI
             for(int i = 0; i < COLUMNS; i++)
             {
                 numberRandom[i] = randomColor.Next(NB_COLORS - 1);
+
+                if(repetitionColors == false)
+                {
+
+                }
                 SwitchGoalColors(numberRandom[i], i);
             }
         }
@@ -221,35 +232,34 @@ namespace Mastermind_GUI
         /// <summary>
         /// Switch permettant de traduire les chiffres générés en couleurs pour le code à trouver
         /// </summary>
-        /// <param name="number"></param>
-        /// <param name="numberPlace"></param>
+        /// <param name="number">nombre généré aléatoirement</param>
+        /// <param name="numberPlace">emplacement de la couleur dans le code</param>
         private void SwitchGoalColors(int number, int numberPlace)
         {
-            for (int i = 0; i < 4; i++)
-                switch (number)
-                {
-                    case 0:
-                        goalColors[numberPlace] = Color.Red;
-                        break;
-                    case 1:
-                        goalColors[numberPlace] = Color.Lime;
-                        break;
-                    case 2:
-                        goalColors[numberPlace] = Color.White;
-                        break;
-                    case 3:
-                        goalColors[numberPlace] = Color.Yellow;
-                        break;
-                    case 4:
-                        goalColors[numberPlace] = Color.Blue;
-                        break;
-                    case 5:
-                        goalColors[numberPlace] = Color.Cyan;
-                        break;
-                    case 6:
-                        goalColors[numberPlace] = Color.Magenta;
-                        break;
-                }
+            switch (number)
+            {
+                case 0:
+                    goalColors[numberPlace] = Color.Red;
+                    break;
+                case 1:
+                    goalColors[numberPlace] = Color.Lime;
+                    break;
+                case 2:
+                    goalColors[numberPlace] = Color.White;
+                    break;
+                case 3:
+                    goalColors[numberPlace] = Color.Yellow;
+                    break;
+                case 4:
+                    goalColors[numberPlace] = Color.Blue;
+                    break;
+                case 5:
+                    goalColors[numberPlace] = Color.Cyan;
+                    break;
+                case 6:
+                    goalColors[numberPlace] = Color.Magenta;
+                    break;
+            }
 
         }
 
@@ -405,8 +415,11 @@ namespace Mastermind_GUI
 
 
         /// <summary>
-        /// Affiche le tableau qui indiquera les indices 
+        /// Affiche le tableau qui indiquera les indices
         /// </summary>
+        /// <param name="panel">panneau dans lequel créer les labels</param>
+        /// <param name="rows">nombre de lignes</param>
+        /// <param name="columns">nombre de colonnes</param>
         private void DisplayHintTable(TableLayoutPanel panel, int rows, int columns)
         {
             //crée le tableau affiché qui montrera les indices
@@ -519,6 +532,24 @@ namespace Mastermind_GUI
                 loseMessage = "Vous avez perdu ! Pfff la loose !";
                 victoryMessage = "Bravo vous avez trouvé !";
                 maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
+            }
+        }
+
+
+        /// <summary>
+        /// permet au joueur de selectionner si il veut des répétitions dans le code aléatoire ou pas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorRepetitionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(ColorRepetitionToolStripMenuItem.Checked == true)
+            {
+                repetitionColors = true;
+            }
+            else
+            {
+                repetitionColors = false;
             }
         }
     }
