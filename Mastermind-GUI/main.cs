@@ -218,13 +218,34 @@ namespace Mastermind_GUI
             Random randomColor = new Random();
             for(int i = 0; i < COLUMNS; i++)
             {
-                numberRandom[i] = randomColor.Next(NB_COLORS - 1);
-
-                if(repetitionColors == false)
+                if(repetitionColors == true)
                 {
+                    numberRandom[i] = randomColor.Next(NB_COLORS - 1);
+                    SwitchGoalColors(numberRandom[i], i);
+                }
+
+                //si le nombre a déja été généré, recommence une génlration de chiffre
+                else if(repetitionColors == false)
+                {
+                    do
+                    {
+                        alreadyChecked = false;
+                        numberRandom[i] = randomColor.Next(NB_COLORS - 1);
+
+                        for (int j = 0; j < COLUMNS; j++)
+                        {
+                            if (alreadyCheckedColors[j] == numberRandom[i])
+                            {
+                                alreadyChecked = true;
+                            }
+                        }
+                    } while (alreadyChecked == true);
+
+                    //insère le chiffre généré dans le tableau des chiffres déja générés
+                    alreadyCheckedColors[i] = numberRandom[i];
+                    SwitchGoalColors(numberRandom[i], i);
 
                 }
-                SwitchGoalColors(numberRandom[i], i);
             }
         }
 
@@ -467,6 +488,7 @@ namespace Mastermind_GUI
         /// <param name="e"></param>
         private void checkBoxDebug_CheckedChanged(object sender, EventArgs e)
         {
+            //si la checkbox est cochée, affiche le code secret
             if (checkBoxDebug.Checked)
             {
                 for(int i = 0; i < COLUMNS; i++)
@@ -551,6 +573,9 @@ namespace Mastermind_GUI
             {
                 repetitionColors = false;
             }
+
+            //regénère un code
+            GenerateColor();
         }
     }
 }
