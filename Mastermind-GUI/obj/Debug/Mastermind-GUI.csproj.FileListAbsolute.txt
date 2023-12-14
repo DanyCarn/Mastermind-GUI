@@ -21,4 +21,4 @@ D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.csproj.CoreCompileIn
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.exe
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind-GUI.pdb
 D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind_GUI.MastermindMenu.resources
-D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind_GUI.changeNumberOfColors.resources
+D:\P_Mastermind-GUI\Mastermind-GUI\obj\Debug\Mastermind_GUI.changeDifficulty.resources

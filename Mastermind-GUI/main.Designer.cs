@@ -30,15 +30,8 @@
         {
             this.btnEnterTry = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnMagenta = new System.Windows.Forms.Button();
-            this.btnCyan = new System.Windows.Forms.Button();
-            this.btnBlue = new System.Windows.Forms.Button();
-            this.btnYellow = new System.Windows.Forms.Button();
-            this.btnWhite = new System.Windows.Forms.Button();
-            this.btnGreen = new System.Windows.Forms.Button();
-            this.btnRed = new System.Windows.Forms.Button();
             this.btnQuit = new System.Windows.Forms.Button();
-            this.guessLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.layoutPanelGuess = new System.Windows.Forms.TableLayoutPanel();
             this.layoutPanelAnswer = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelHints = new System.Windows.Forms.TableLayoutPanel();
             this.checkBoxDebug = new System.Windows.Forms.CheckBox();
@@ -47,13 +40,15 @@
             this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.difficultéToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ColorRepetitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRetry = new System.Windows.Forms.Button();
+            this.pnlButtons = new System.Windows.Forms.Panel();
             this.menuStripGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnEnterTry
             // 
-            this.btnEnterTry.Location = new System.Drawing.Point(17, 369);
+            this.btnEnterTry.Location = new System.Drawing.Point(16, 419);
             this.btnEnterTry.Name = "btnEnterTry";
             this.btnEnterTry.Size = new System.Drawing.Size(93, 27);
             this.btnEnterTry.TabIndex = 18;
@@ -63,7 +58,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(18, 421);
+            this.btnClear.Location = new System.Drawing.Point(17, 452);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(92, 27);
             this.btnClear.TabIndex = 17;
@@ -71,79 +66,9 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // btnMagenta
-            // 
-            this.btnMagenta.BackColor = System.Drawing.Color.Magenta;
-            this.btnMagenta.Location = new System.Drawing.Point(16, 180);
-            this.btnMagenta.Name = "btnMagenta";
-            this.btnMagenta.Size = new System.Drawing.Size(43, 43);
-            this.btnMagenta.TabIndex = 16;
-            this.btnMagenta.UseVisualStyleBackColor = false;
-            this.btnMagenta.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnCyan
-            // 
-            this.btnCyan.BackColor = System.Drawing.Color.Cyan;
-            this.btnCyan.Location = new System.Drawing.Point(66, 133);
-            this.btnCyan.Name = "btnCyan";
-            this.btnCyan.Size = new System.Drawing.Size(44, 43);
-            this.btnCyan.TabIndex = 15;
-            this.btnCyan.UseVisualStyleBackColor = false;
-            this.btnCyan.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnBlue
-            // 
-            this.btnBlue.BackColor = System.Drawing.Color.Blue;
-            this.btnBlue.Location = new System.Drawing.Point(16, 133);
-            this.btnBlue.Name = "btnBlue";
-            this.btnBlue.Size = new System.Drawing.Size(45, 43);
-            this.btnBlue.TabIndex = 14;
-            this.btnBlue.UseVisualStyleBackColor = false;
-            this.btnBlue.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnYellow
-            // 
-            this.btnYellow.BackColor = System.Drawing.Color.Yellow;
-            this.btnYellow.Location = new System.Drawing.Point(66, 86);
-            this.btnYellow.Name = "btnYellow";
-            this.btnYellow.Size = new System.Drawing.Size(44, 43);
-            this.btnYellow.TabIndex = 13;
-            this.btnYellow.UseVisualStyleBackColor = false;
-            this.btnYellow.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnWhite
-            // 
-            this.btnWhite.BackColor = System.Drawing.Color.White;
-            this.btnWhite.Location = new System.Drawing.Point(17, 86);
-            this.btnWhite.Name = "btnWhite";
-            this.btnWhite.Size = new System.Drawing.Size(43, 43);
-            this.btnWhite.TabIndex = 12;
-            this.btnWhite.UseVisualStyleBackColor = false;
-            this.btnWhite.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnGreen
-            // 
-            this.btnGreen.BackColor = System.Drawing.Color.Lime;
-            this.btnGreen.Location = new System.Drawing.Point(66, 39);
-            this.btnGreen.Name = "btnGreen";
-            this.btnGreen.Size = new System.Drawing.Size(43, 43);
-            this.btnGreen.TabIndex = 11;
-            this.btnGreen.UseVisualStyleBackColor = false;
-            this.btnGreen.Click += new System.EventHandler(this.btn_Click);
-            // 
-            // btnRed
-            // 
-            this.btnRed.BackColor = System.Drawing.Color.Red;
-            this.btnRed.Location = new System.Drawing.Point(17, 39);
-            this.btnRed.Name = "btnRed";
-            this.btnRed.Size = new System.Drawing.Size(43, 43);
-            this.btnRed.TabIndex = 10;
-            this.btnRed.UseVisualStyleBackColor = false;
-            this.btnRed.Click += new System.EventHandler(this.btn_Click);
-            // 
             // btnQuit
             // 
-            this.btnQuit.Location = new System.Drawing.Point(16, 564);
+            this.btnQuit.Location = new System.Drawing.Point(16, 553);
             this.btnQuit.Name = "btnQuit";
             this.btnQuit.Size = new System.Drawing.Size(113, 27);
             this.btnQuit.TabIndex = 21;
@@ -151,16 +76,16 @@
             this.btnQuit.UseVisualStyleBackColor = true;
             this.btnQuit.Click += new System.EventHandler(this.btnQuit_Click);
             // 
-            // guessLayoutPanel
+            // layoutPanelGuess
             // 
-            this.guessLayoutPanel.ColumnCount = 1;
-            this.guessLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.guessLayoutPanel.Location = new System.Drawing.Point(216, 39);
-            this.guessLayoutPanel.Name = "guessLayoutPanel";
-            this.guessLayoutPanel.RowCount = 1;
-            this.guessLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.guessLayoutPanel.Size = new System.Drawing.Size(230, 440);
-            this.guessLayoutPanel.TabIndex = 26;
+            this.layoutPanelGuess.ColumnCount = 1;
+            this.layoutPanelGuess.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPanelGuess.Location = new System.Drawing.Point(216, 39);
+            this.layoutPanelGuess.Name = "layoutPanelGuess";
+            this.layoutPanelGuess.RowCount = 1;
+            this.layoutPanelGuess.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutPanelGuess.Size = new System.Drawing.Size(230, 440);
+            this.layoutPanelGuess.TabIndex = 26;
             // 
             // layoutPanelAnswer
             // 
@@ -187,7 +112,7 @@
             // checkBoxDebug
             // 
             this.checkBoxDebug.AutoSize = true;
-            this.checkBoxDebug.Location = new System.Drawing.Point(18, 525);
+            this.checkBoxDebug.Location = new System.Drawing.Point(390, 502);
             this.checkBoxDebug.Name = "checkBoxDebug";
             this.checkBoxDebug.Size = new System.Drawing.Size(56, 17);
             this.checkBoxDebug.TabIndex = 29;
@@ -232,41 +157,50 @@
             // difficultéToolStripMenuItem
             // 
             this.difficultéToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ColorRepetitionToolStripMenuItem});
+            this.optionsToolStripMenuItem});
             this.difficultéToolStripMenuItem.Name = "difficultéToolStripMenuItem";
             this.difficultéToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.difficultéToolStripMenuItem.Text = "Difficulté";
             // 
-            // ColorRepetitionToolStripMenuItem
+            // optionsToolStripMenuItem
             // 
-            this.ColorRepetitionToolStripMenuItem.Checked = true;
-            this.ColorRepetitionToolStripMenuItem.CheckOnClick = true;
-            this.ColorRepetitionToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ColorRepetitionToolStripMenuItem.Name = "ColorRepetitionToolStripMenuItem";
-            this.ColorRepetitionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.ColorRepetitionToolStripMenuItem.Text = "Répétition de couleurs";
-            this.ColorRepetitionToolStripMenuItem.Click += new System.EventHandler(this.ColorRepetitionToolStripMenuItem_Click);
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // btnRetry
+            // 
+            this.btnRetry.Location = new System.Drawing.Point(16, 521);
+            this.btnRetry.Name = "btnRetry";
+            this.btnRetry.Size = new System.Drawing.Size(113, 24);
+            this.btnRetry.TabIndex = 31;
+            this.btnRetry.Text = "Recommencer";
+            this.btnRetry.UseVisualStyleBackColor = true;
+            this.btnRetry.Click += new System.EventHandler(this.btnRetry_Click);
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Location = new System.Drawing.Point(42, 39);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(67, 374);
+            this.pnlButtons.TabIndex = 32;
             // 
             // Mastermind
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(467, 603);
             this.Controls.Add(this.checkBoxDebug);
+            this.Controls.Add(this.pnlButtons);
+            this.Controls.Add(this.btnRetry);
             this.Controls.Add(this.tableLayoutPanelHints);
             this.Controls.Add(this.layoutPanelAnswer);
-            this.Controls.Add(this.guessLayoutPanel);
+            this.Controls.Add(this.layoutPanelGuess);
             this.Controls.Add(this.btnQuit);
             this.Controls.Add(this.btnEnterTry);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnMagenta);
-            this.Controls.Add(this.btnCyan);
-            this.Controls.Add(this.btnBlue);
-            this.Controls.Add(this.btnYellow);
-            this.Controls.Add(this.btnWhite);
-            this.Controls.Add(this.btnGreen);
-            this.Controls.Add(this.btnRed);
             this.Controls.Add(this.menuStripGame);
             this.Name = "Mastermind";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -281,15 +215,8 @@
         #endregion
         private System.Windows.Forms.Button btnEnterTry;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnMagenta;
-        private System.Windows.Forms.Button btnCyan;
-        private System.Windows.Forms.Button btnBlue;
-        private System.Windows.Forms.Button btnYellow;
-        private System.Windows.Forms.Button btnWhite;
-        private System.Windows.Forms.Button btnGreen;
-        private System.Windows.Forms.Button btnRed;
         private System.Windows.Forms.Button btnQuit;
-        private System.Windows.Forms.TableLayoutPanel guessLayoutPanel;
+        private System.Windows.Forms.TableLayoutPanel layoutPanelGuess;
         private System.Windows.Forms.TableLayoutPanel layoutPanelAnswer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHints;
         private System.Windows.Forms.CheckBox checkBoxDebug;
@@ -298,7 +225,9 @@
         private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem difficultéToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ColorRepetitionToolStripMenuItem;
+        private System.Windows.Forms.Button btnRetry;
+        private System.Windows.Forms.Panel pnlButtons;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }
 

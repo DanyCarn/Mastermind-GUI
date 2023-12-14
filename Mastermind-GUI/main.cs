@@ -17,21 +17,33 @@ namespace Mastermind_GUI
 {
     public partial class Mastermind : Form
     {
-        private const int ROWS = 10;
-        private const int COLUMNS = 4;
-        private const int GUESS_SIZE_X = 40;
-        private const int GUESS_SIZE_Y = 40;
+        #region forms
+        changeDifficulty difficulty;
+        MastermindMenu menu;
+        #endregion
+
+        #region const
+        private const int DEFAULT_ROWS = 10;
+        private const int DEFAULT_COLUMNS = 4;
+        //Taille des boutons et des labels
+        private const int SIZE_X = 40;
+        private const int SIZE_Y = 40;
         private const int NB_COLORS = 7;
         private const int HINT_SIZE_X = 10;
         private const int HINT_SIZE_Y = 10;
+        #endregion
 
+        #region bool
         private bool english = false;
         //permet de savoir si le joueur veut les répétitions de couleurs ou pas
-        private bool repetitionColors = true;
+        public bool repetitionColors = true;
         //permet de savoir si un chiffre du code a déja été généré
         private bool alreadyChecked = false;
+        #endregion
 
-
+        #region int
+        public int rows = DEFAULT_ROWS;
+        public int columns = DEFAULT_COLUMNS;
         private int guessRow = 0;
         private int guessCol = 0;
         private int currentColumn = 0;
@@ -39,29 +51,40 @@ namespace Mastermind_GUI
         private int hintOk = 0;
         private int badPosition = 0;
         private int finalVerificationOk = 0;
+        #endregion
+
+        #region string
         //message de réussite
         private string victoryMessage = "Bravo vous avez trouvé !";
         //message d'échec
         private string loseMessage = "Vous avez perdu ! Dommage...";
         //message qui indique que le nombre max de couleurs a été rentré
         private string maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
+        #endregion
 
-        private int[] numberRandom = new int[COLUMNS];
-        private Label[,] labelArray = new Label[ROWS, COLUMNS];
-        private Label[] labelAnswerArray = new Label[COLUMNS];
-        private Color[] goalColors = new Color[COLUMNS];
-        private Color[] guessColors = new Color[COLUMNS];
-        private Color[] notOk = new Color[COLUMNS];
-        private Label[,] hints = new Label[ROWS, COLUMNS];
-        private int[] alreadyCheckedColors = new int[COLUMNS];
+        #region array
+        private int[] numberRandom = new int[DEFAULT_COLUMNS];
+        private Label[,] labelArray = new Label[DEFAULT_ROWS, DEFAULT_COLUMNS];
+        private Label[] labelAnswerArray = new Label[DEFAULT_COLUMNS];
+        private Color[] goalColors = new Color[DEFAULT_COLUMNS];
+        private Color[] guessColors = new Color[DEFAULT_COLUMNS];
+        private Color[] notOk = new Color[DEFAULT_COLUMNS];
+        private Label[,] hints = new Label[DEFAULT_ROWS, DEFAULT_COLUMNS];
+        private int[] alreadyCheckedColors = new int[DEFAULT_COLUMNS];
+        //tableau contenant les couleurs jouables
+        private Color[] Colors = new Color[] { Color.Red,Color.Blue,Color.Yellow,Color.Lime,Color.White,Color.Cyan,Color.Magenta };
+        #endregion
 
         public Mastermind()
         {
             InitializeComponent();
-            DisplayGuessTable(guessLayoutPanel, COLUMNS, ROWS);
+            difficulty = new changeDifficulty(this);
+            menu = new MastermindMenu();
+            DisplayGuessTable(layoutPanelGuess, columns, rows);
             GenerateColor();
-            DisplayAnswerTable(layoutPanelAnswer, COLUMNS, ROWS);
-            DisplayHintTable(tableLayoutPanelHints, ROWS, COLUMNS);
+            DisplayAnswerTable(layoutPanelAnswer, columns, rows);
+            DisplayHintTable(tableLayoutPanelHints, rows, columns);
+            DisplayColorButtons();
             ActivateValidateBtn();
         }
 
@@ -72,7 +95,7 @@ namespace Mastermind_GUI
         /// <param name="e"></param>
         private void btn_Click(object sender, EventArgs e)
         {
-            if(currentColumn == COLUMNS)
+            if(currentColumn == columns)
             {
                 //Si 4 couleurs ont déja été rentrées, en informe le joueur et lui indique les différentes options à sa disposition 
                 MessageBox.Show(maxColorsMessage);
@@ -101,10 +124,11 @@ namespace Mastermind_GUI
             //lorsque le bouton Effacer est cliqué, efface toutes les couleurs du tableau affiché
             for(int i = 0; i < currentColumn; i++)
             {
-                labelArray[currentRow, i].BackColor = SystemColors.AppWorkspace;
+                labelArray[currentRow, i].BackColor = SystemColors.ActiveCaption;
             }
             currentColumn = 0;
         }
+
 
         /// <summary>
         /// Quitte le jeu et revient au menu
@@ -113,11 +137,8 @@ namespace Mastermind_GUI
         /// <param name="e"></param>
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            //crée l'instance pour le menu du mastermind
-            Form MastermindMenu = new MastermindMenu();
-
             //affiche le menu
-            MastermindMenu.Show();
+            menu.Show();
 
             //cache cette page
             this.Close();
@@ -144,7 +165,7 @@ namespace Mastermind_GUI
                     //crée chaque label
                     Label Guess = new Label();
                     Guess.AutoSize = false;
-                    Guess.Size = new Size(GUESS_SIZE_X,GUESS_SIZE_Y);
+                    Guess.Size = new Size(SIZE_X,SIZE_Y);
                     Guess.BorderStyle = BorderStyle.FixedSingle;
                     Guess.Name = "guess" + Convert.ToString(guessRow) + Convert.ToString(guessCol);
                     layoutPanel.Controls.Add(Guess);
@@ -157,12 +178,12 @@ namespace Mastermind_GUI
             //ajoute les styles pour que le tableau soit bien mis en place
             for(int i = 0; i < rows; i++)
             {
-                layoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100/ROWS));
+                layoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100/ rows));
             }
 
             for(int i = 0; i < columns; i++)
             {
-                layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100/COLUMNS));
+                layoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100/columns));
             }
         }
 
@@ -187,7 +208,7 @@ namespace Mastermind_GUI
                 //crée chaque label
                 Label answer = new Label();
                 answer.AutoSize = false;
-                answer.Size = new Size(GUESS_SIZE_X, GUESS_SIZE_Y);
+                answer.Size = new Size(SIZE_X, SIZE_Y);
                 answer.BorderStyle = BorderStyle.FixedSingle;
                 answer.Name = "goal" + Convert.ToString(guessRow) + Convert.ToString(guessCol);
                 answerPanel.Controls.Add(answer);
@@ -199,12 +220,12 @@ namespace Mastermind_GUI
             //ajoute les styles pour que le tableau soit bien mis en place
             for (int i = 0; i < rows; i++)
             {
-                answerPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / ROWS));
+                answerPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / rows));
             }
 
             for (int i = 0; i < columns; i++)
             {
-                answerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / COLUMNS));
+                answerPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / columns));
             }
         }
 
@@ -216,7 +237,7 @@ namespace Mastermind_GUI
         {
             //crée un code aléatoire de 4 chiffres puis le traduit en couleurs
             Random randomColor = new Random();
-            for(int i = 0; i < COLUMNS; i++)
+            for(int i = 0; i < columns; i++)
             {
                 if(repetitionColors == true)
                 {
@@ -232,7 +253,7 @@ namespace Mastermind_GUI
                         alreadyChecked = false;
                         numberRandom[i] = randomColor.Next(NB_COLORS - 1);
 
-                        for (int j = 0; j < COLUMNS; j++)
+                        for (int j = 0; j < columns; j++)
                         {
                             if (alreadyCheckedColors[j] == numberRandom[i])
                             {
@@ -257,6 +278,7 @@ namespace Mastermind_GUI
         /// <param name="numberPlace">emplacement de la couleur dans le code</param>
         private void SwitchGoalColors(int number, int numberPlace)
         {
+            //Désigne la couleur obtenue selon le chiffre généré aléatoirement
             switch (number)
             {
                 case 0:
@@ -308,7 +330,8 @@ namespace Mastermind_GUI
         /// </summary>
         private void ActivateValidateBtn()
         {
-            if(currentColumn < 4)
+            //active le bouton valider si les quatre couleurs on été rentrées
+            if(currentColumn < columns)
             {
                 btnEnterTry.Enabled = false;
             }
@@ -330,12 +353,12 @@ namespace Mastermind_GUI
             finalVerificationOk = 0;
 
             //Réinitialise le tableau contenant les indications des couleurs trouvées ou mal placées
-            for (int i = 0; i < COLUMNS; i++)
+            for (int i = 0; i < columns; i++)
             {
                 notOk[i] = Color.Black;
             }
 
-            for (int i = 0; i < COLUMNS; i++)
+            for (int i = 0; i < columns; i++)
             {
                 //si la couleur est juste, augmente le nombre des indices à mettre et le compteur de couleurs trouvées
                 if (guessColors[i] == goalColors[i])
@@ -348,7 +371,7 @@ namespace Mastermind_GUI
                 {
 
                     //parcours le goal et le compare au guess afin de trouver des couleurs mal placées
-                    for (int j = 0; j < COLUMNS; j++)
+                    for (int j = 0; j < columns; j++)
                     {
                         if (goalColors[j] == guessColors[i])
                         {
@@ -363,7 +386,7 @@ namespace Mastermind_GUI
             }
 
             //pour chaque couleur rouge dans le tableau notOk,augmente le compteur bad position pour mettre les indices de mal placé
-            for (int i = 0; i < COLUMNS; i++)
+            for (int i = 0; i < columns; i++)
             {
                 if (notOk[i] == Color.Red)
                 {
@@ -373,7 +396,7 @@ namespace Mastermind_GUI
             }
 
             //affiche les indices
-            for(int i = 0; i < COLUMNS; i++)
+            for(int i = 0; i < columns; i++)
             {
                 if(badPosition > 0)
                 {
@@ -389,40 +412,25 @@ namespace Mastermind_GUI
             }
 
             //Si 4 couleurs justes ont été trouvées, fini le jeu
-            if (finalVerificationOk == 4)
+            if (finalVerificationOk == columns)
             {
                 //instancie le menu 
                 Form MastermindMenu = new MastermindMenu();
 
                 //affiche le message de réussite
                 MessageBox.Show(victoryMessage);
-
-                //Affiche le menu du jeu 
-                MastermindMenu.Show();
-
-                //Ferme la fenêtre de jeu
-                this.Hide();
             }
 
             //Si le nombre d'essais maximum a été atteint, informe le joueur qu'il a perdu
-            else if (currentRow == ROWS - 1)
+            else if (currentRow == rows - 1)
             {
                 //Affiche le goal
-                for (int i = 0; i < COLUMNS; i++)
+                for (int i = 0; i < columns; i++)
                 {
                     labelAnswerArray[i].BackColor = goalColors[i];
                 }
                 //Affiche le message si le joueur a perdu et le renvoie sur la page d'accueil
                 MessageBox.Show(loseMessage);
-
-                //instancie le menu
-                Form MastermindMenu = new MastermindMenu();
-
-                //Affiche le menu du jeu 
-                MastermindMenu.Show();
-
-                //Ferme la fenêtre de jeu
-                this.Hide();
 
             }
 
@@ -456,11 +464,13 @@ namespace Mastermind_GUI
                 {
                     //crée chaque label
                     Label hint = new Label();
-                    hint.AutoSize = false;
-                    hint.Size = new Size(HINT_SIZE_X, HINT_SIZE_Y);
-                    hint.Anchor = AnchorStyles.None;
-                    hint.BorderStyle = BorderStyle.FixedSingle;
-                    hint.Name = "hint" + Convert.ToString(guessRow) + Convert.ToString(guessCol);
+                    {
+                        hint.AutoSize = false;
+                        hint.Size = new Size(HINT_SIZE_X, HINT_SIZE_Y);
+                        hint.Anchor = AnchorStyles.None;
+                        hint.BorderStyle = BorderStyle.FixedSingle;
+                        hint.Name = "hint" + Convert.ToString(guessRow) + Convert.ToString(guessCol);
+                    }
 
                     //insère le label d'indice créé dans le tableau d'indices
                     hints[i, j] = hint;
@@ -471,12 +481,12 @@ namespace Mastermind_GUI
             //ajoute les styles pour que le tableau soit bien mis en place
             for (int i = 0; i < rows; i++)
             {
-                panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / ROWS));
+                panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / rows));
             }
 
             for (int i = 0; i < columns; i++)
             {
-                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / COLUMNS));
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / columns));
             }
         }
 
@@ -491,16 +501,16 @@ namespace Mastermind_GUI
             //si la checkbox est cochée, affiche le code secret
             if (checkBoxDebug.Checked)
             {
-                for(int i = 0; i < COLUMNS; i++)
+                for(int i = 0; i < columns; i++)
                 {
                     labelAnswerArray[i].BackColor = goalColors[i];
                 }
             }
             else
             {
-                for(int i = 0; i < COLUMNS; i++)
+                for(int i = 0; i < columns; i++)
                 {
-                    labelAnswerArray[i].BackColor = SystemColors.AppWorkspace;
+                    labelAnswerArray[i].BackColor = SystemColors.ActiveCaption;
                 }
             }
         }
@@ -544,6 +554,7 @@ namespace Mastermind_GUI
                 loseMessage = "You lost ! Take the L.";
                 victoryMessage = "Well done, you won !";
                 maxColorsMessage = "Maximum of colors reached.";
+                btnRetry.Text = "Retry";
             }
             else
             {
@@ -554,28 +565,80 @@ namespace Mastermind_GUI
                 loseMessage = "Vous avez perdu ! Pfff la loose !";
                 victoryMessage = "Bravo vous avez trouvé !";
                 maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
+                btnRetry.Text = "Recommencer";
             }
         }
 
 
         /// <summary>
-        /// permet au joueur de selectionner si il veut des répétitions dans le code aléatoire ou pas
+        /// Réinitialise le tableau de jeu
+        /// </summary>
+        public void ResetAll()
+        {
+            //réinitialise tous ce qu'il faut pour recommencer une partie
+            layoutPanelGuess.Controls.Clear();
+            tableLayoutPanelHints.Controls.Clear();
+            layoutPanelAnswer.Controls.Clear();
+            guessRow = 0;
+            guessCol = 0;
+            currentColumn = 0;
+            currentRow = 0;
+            int[] numberRandom = new int[columns];
+            Label[,] labelArray = new Label[rows, columns];
+            Label[] labelAnswerArray = new Label[columns];
+            Color[] goalColors = new Color[columns];
+            Color[] guessColors = new Color[columns];
+            Color[] notOk = new Color[columns];
+            Label[,] hints = new Label[rows, columns];
+            int[] alreadyCheckedColors = new int[columns];
+            GenerateColor();
+            DisplayGuessTable(layoutPanelGuess, columns, rows);
+            DisplayHintTable(tableLayoutPanelHints, rows, columns);
+            DisplayAnswerTable(layoutPanelAnswer, columns, rows);
+        }
+
+
+        /// <summary>
+        /// Bouton permettant de recommencer une partie
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ColorRepetitionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnRetry_Click(object sender, EventArgs e)
         {
-            if(ColorRepetitionToolStripMenuItem.Checked == true)
-            {
-                repetitionColors = true;
-            }
-            else
-            {
-                repetitionColors = false;
-            }
+            ResetAll();
+        }
 
-            //regénère un code
-            GenerateColor();
+
+        /// <summary>
+        /// Affiche les boutons qui servent à choisir les couleurs
+        /// </summary>
+        private void DisplayColorButtons()
+        {
+            for(int i = 0; i < NB_COLORS; i++)
+            {
+                //Instancie le nouveau bouton
+                Button button = new Button();
+
+                //les paramètres des boutons
+                button.BackColor = Colors[i];
+                button.Size = new Size(SIZE_X, SIZE_Y);
+                button.Location = new Point(0, (pnlButtons.Height / NB_COLORS)*i);
+                button.Click += new EventHandler(btn_Click);
+
+                //Ajoute le bouton au panel des boutons
+                pnlButtons.Controls.Add(button);
+            }
+        }
+
+
+        /// <summary>
+        /// Ouvre la page qui permet de modifier les paramètres
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            difficulty.Show();
         }
     }
 }

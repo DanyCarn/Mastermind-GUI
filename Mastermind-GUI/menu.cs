@@ -17,8 +17,11 @@ namespace Mastermind_GUI
 {
     public partial class MastermindMenu : Form
     {
-        //instancie le form du jeu
-        private Form Mastermind = new Mastermind();
+        #region Forms
+        //le form du jeu
+        Mastermind game;
+        #endregion
+
         public MastermindMenu()
         {
             InitializeComponent();
@@ -55,9 +58,9 @@ namespace Mastermind_GUI
         /// <param name="e"></param>
         private void btnPlay_Click(object sender, EventArgs e)
         {
-
+            game = new Mastermind();
             //affiche l'autre page
-            Mastermind.Show();
+            game.Show();
 
             //Cache le menu
             this.Hide();
