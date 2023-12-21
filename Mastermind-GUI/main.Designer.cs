@@ -80,22 +80,22 @@
             // 
             this.layoutPanelGuess.ColumnCount = 1;
             this.layoutPanelGuess.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutPanelGuess.Location = new System.Drawing.Point(216, 39);
+            this.layoutPanelGuess.Location = new System.Drawing.Point(255, 39);
             this.layoutPanelGuess.Name = "layoutPanelGuess";
             this.layoutPanelGuess.RowCount = 1;
             this.layoutPanelGuess.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutPanelGuess.Size = new System.Drawing.Size(230, 440);
+            this.layoutPanelGuess.Size = new System.Drawing.Size(286, 440);
             this.layoutPanelGuess.TabIndex = 26;
             // 
             // layoutPanelAnswer
             // 
             this.layoutPanelAnswer.ColumnCount = 1;
             this.layoutPanelAnswer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutPanelAnswer.Location = new System.Drawing.Point(216, 525);
+            this.layoutPanelAnswer.Location = new System.Drawing.Point(255, 525);
             this.layoutPanelAnswer.Name = "layoutPanelAnswer";
             this.layoutPanelAnswer.RowCount = 1;
             this.layoutPanelAnswer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.layoutPanelAnswer.Size = new System.Drawing.Size(230, 66);
+            this.layoutPanelAnswer.Size = new System.Drawing.Size(286, 66);
             this.layoutPanelAnswer.TabIndex = 27;
             // 
             // tableLayoutPanelHints
@@ -106,13 +106,13 @@
             this.tableLayoutPanelHints.Name = "tableLayoutPanelHints";
             this.tableLayoutPanelHints.RowCount = 1;
             this.tableLayoutPanelHints.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelHints.Size = new System.Drawing.Size(82, 440);
+            this.tableLayoutPanelHints.Size = new System.Drawing.Size(121, 440);
             this.tableLayoutPanelHints.TabIndex = 28;
             // 
             // checkBoxDebug
             // 
             this.checkBoxDebug.AutoSize = true;
-            this.checkBoxDebug.Location = new System.Drawing.Point(390, 502);
+            this.checkBoxDebug.Location = new System.Drawing.Point(485, 502);
             this.checkBoxDebug.Name = "checkBoxDebug";
             this.checkBoxDebug.Size = new System.Drawing.Size(56, 17);
             this.checkBoxDebug.TabIndex = 29;
@@ -127,7 +127,7 @@
             this.difficultéToolStripMenuItem});
             this.menuStripGame.Location = new System.Drawing.Point(0, 0);
             this.menuStripGame.Name = "menuStripGame";
-            this.menuStripGame.Size = new System.Drawing.Size(467, 24);
+            this.menuStripGame.Size = new System.Drawing.Size(553, 24);
             this.menuStripGame.TabIndex = 30;
             this.menuStripGame.Text = "menuStrip1";
             // 
@@ -165,15 +165,15 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // btnRetry
             // 
-            this.btnRetry.Location = new System.Drawing.Point(16, 521);
+            this.btnRetry.Location = new System.Drawing.Point(136, 553);
             this.btnRetry.Name = "btnRetry";
-            this.btnRetry.Size = new System.Drawing.Size(113, 24);
+            this.btnRetry.Size = new System.Drawing.Size(113, 27);
             this.btnRetry.TabIndex = 31;
             this.btnRetry.Text = "Recommencer";
             this.btnRetry.UseVisualStyleBackColor = true;
@@ -190,8 +190,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(467, 603);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(553, 603);
             this.Controls.Add(this.checkBoxDebug);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.btnRetry);

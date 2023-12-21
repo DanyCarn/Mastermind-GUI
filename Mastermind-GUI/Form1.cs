@@ -28,13 +28,16 @@ namespace Mastermind_GUI
 
             //insère les valeurs de colonnes et lignes actuelles
             numericUpDownColumns.Value = game.columns;
-            numericUpDownRows.Value = game.rows;
         }
 
+        /// <summary>
+        /// Valide les options choisies
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnValidate_Click(object sender, EventArgs e)
         {
             //affecte le nombre choisi par l'utilisateur aux colonnes et lignes du jeu
-            game.rows = Convert.ToInt32(numericUpDownRows.Value);
             game.columns = Convert.ToInt32(numericUpDownColumns.Value);
 
             //reset la partie pour pouvoir mettre à jour
@@ -42,6 +45,11 @@ namespace Mastermind_GUI
             this.Hide();
         }
 
+        /// <summary>
+        /// permet de choisir si on souhaite la répétition des couleurs dans le code aléatoire
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkRepetition_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRepetition.Checked)
@@ -52,6 +60,16 @@ namespace Mastermind_GUI
             {
                 game.repetitionColors = false;
             }
+        }
+
+        /// <summary>
+        /// n'enregistre aucune modification et ferme la fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

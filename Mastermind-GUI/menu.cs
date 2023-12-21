@@ -33,7 +33,7 @@ namespace Mastermind_GUI
         /// </summary>
         private void DisplayWelcome()
         {
-            //Message de bienvenue au jeu
+            //Message de bienvenue au jeu qui explique les règles
             lblWelcome.Text = "Bienvenue au Mastermind \n" +
                 "Dans ce jeu, vous devez trouver le code caché de quatre couleurs en moins de 10 essais.\n" +
                 "Bonne Chance ! \n";
