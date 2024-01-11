@@ -39,7 +39,7 @@
             this.langueToolStripMenuItemLanguage = new System.Windows.Forms.ToolStripMenuItem();
             this.françaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.difficultéToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.difficultyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRetry = new System.Windows.Forms.Button();
             this.pnlButtons = new System.Windows.Forms.Panel();
@@ -124,7 +124,7 @@
             // 
             this.menuStripGame.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.langueToolStripMenuItemLanguage,
-            this.difficultéToolStripMenuItem});
+            this.difficultyToolStripMenuItem});
             this.menuStripGame.Location = new System.Drawing.Point(0, 0);
             this.menuStripGame.Name = "menuStripGame";
             this.menuStripGame.Size = new System.Drawing.Size(553, 24);
@@ -154,18 +154,18 @@
             this.englishToolStripMenuItem.Text = "English";
             this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
-            // difficultéToolStripMenuItem
+            // difficultyToolStripMenuItem
             // 
-            this.difficultéToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.difficultyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
-            this.difficultéToolStripMenuItem.Name = "difficultéToolStripMenuItem";
-            this.difficultéToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.difficultéToolStripMenuItem.Text = "Difficulté";
+            this.difficultyToolStripMenuItem.Name = "difficultyToolStripMenuItem";
+            this.difficultyToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.difficultyToolStripMenuItem.Text = "Difficulté";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
@@ -224,7 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem langueToolStripMenuItemLanguage;
         private System.Windows.Forms.ToolStripMenuItem françaisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem englishToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem difficultéToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem difficultyToolStripMenuItem;
         private System.Windows.Forms.Button btnRetry;
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;

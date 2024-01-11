@@ -436,6 +436,12 @@ namespace Mastermind_GUI
 
                 //affiche le message de réussite
                 MessageBox.Show(_victoryMessage);
+
+                //affiche le code dans les cases prévues a cet effet
+                for(int i = 0; i < columns; i++)
+                {
+                    _labelAnswerArray[i].BackColor = _goalColors[i];
+                }
             }
 
             //Si le nombre d'essais maximum a été atteint, informe le joueur qu'il a perdu
@@ -526,7 +532,7 @@ namespace Mastermind_GUI
             {
                 for(int i = 0; i < columns; i++)
                 {
-                    _labelAnswerArray[i].BackColor = SystemColors.ActiveCaption;
+                    _labelAnswerArray[i].BackColor = SystemColors.AppWorkspace;
                 }
             }
         }
@@ -571,6 +577,7 @@ namespace Mastermind_GUI
                 _victoryMessage = "Well done, you won !";
                 _maxColorsMessage = "Maximum of colors reached.";
                 btnRetry.Text = "Retry";
+                difficultyToolStripMenuItem.Text = "Difficulty";
             }
             else
             {
@@ -582,6 +589,8 @@ namespace Mastermind_GUI
                 _victoryMessage = "Bravo vous avez trouvé !";
                 _maxColorsMessage = "Le nombre de couleurs maximum par essai a été atteint.";
                 btnRetry.Text = "Recommencer";
+                difficultyToolStripMenuItem.Text = "Difficulté";
+
             }
         }
 
